@@ -1,11 +1,29 @@
 pipeline {
-  agent any
-  stages {
-    stage('tep1') {
-      steps {
-        input(message: 'input', id: 'id', ok: 'ok', submitter: 'a', submitterParameter: 'b')
-      }
-    }
+    agent any
 
-  }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+    post {
+       success {
+            echo 'Deploy成功'
+       }
+       failure {
+            echo 'Deploy失败'
+       }
+    }
 }
